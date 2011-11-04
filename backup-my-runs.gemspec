@@ -1,8 +1,9 @@
 # Ensure we require the local version and not one we might have installed already
+require File.join([File.dirname(__FILE__),'lib','backup-my-runs_version.rb'])
 
 spec = Gem::Specification.new do |s| 
   s.name = 'backup-my-runs'
-  s.version = '0.0.1'
+  s.version = BackupMyRuns::Version
   s.author = 'Rheneas'
   s.email = 'your@email.address.com'
   s.homepage = 'https://github.com/rheneas/backup-my-runs'
