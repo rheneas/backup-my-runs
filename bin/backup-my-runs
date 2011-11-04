@@ -14,6 +14,7 @@ $: << File.expand_path(File.dirname(File.realpath(__FILE__)) + '/../lib')
 require 'rubygems'
 require 'gli'
 require 'backup-my-runs_version'
+require 'backup_my_runs'
 
 include GLI
 

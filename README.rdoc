@@ -1,6 +1,33 @@
-= backup-my-runs
+= Backup my runs
 
-Describe your project here
+A very simple tool to download all your runkeeper activities as JSON files.
 
-:include:backup-my-runs.rdoc
 
+== Getting started
+
+    $git clone https://github.com/rheneas/backup-my-runs
+    $cd backup-my-runs
+    $gem install bundler
+    $bundle install
+
+
+== Downloading activities
+
+=== For help
+   $bin/backup-my-runs backup help
+
+=== Simple download
+   $bin/backup-my-runs backup --username=<your username> --dir=/tmp/runkeeper
+
+=== Dry runs, will not download any files
+   $bin/backup-my-runs backup --username=<your username> --dry
+
+=== Limit the number of files downloaded
+   $bin/backup-my-runs backup --username=<your username> --limit=10
+
+
+
+== Developed on
+
+- Mac OS X 10.7
+- Ruby 1.9.2

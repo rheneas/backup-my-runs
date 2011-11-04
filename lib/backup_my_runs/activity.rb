@@ -26,7 +26,7 @@ module BackupMyRuns
         return
       end
 
-      Logger.log("#{dry ? "dry run, not " : ""}downloading #{url} to #{file_path}".capitalize)
+      Logger.log("#{dry ? "dry run, not " : ""}downloading".capitalize + " #{url} to #{file_path}")
 
       unless dry
         page = open(url)
