@@ -1,0 +1,5 @@
+= backup-my-runs
+
+Generate this with
+    backup-my-runs rdoc
+After you have described your command line interface
