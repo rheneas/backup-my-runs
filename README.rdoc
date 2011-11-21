@@ -31,3 +31,6 @@ A very simple tool to download all your runkeeper activities as JSON files.
 
 - Mac OS X 10.7
 - Ruby 1.9.2
+
+== Contact
+rheneas.the.train@hotmail.com
