@@ -17,13 +17,13 @@ A very simple tool to download all your runkeeper activities as JSON files.
    bin/backup-my-runs backup help
 
 === Simple download
-   bin/backup-my-runs backup --username=<your username> --dir=/tmp/runkeeper
+   bin/backup-my-runs backup --email=<your username> --password=<your password> --dir=/tmp/runkeeper
 
 === Dry runs, will not download any files
-   bin/backup-my-runs backup --username=<your username> --dry
+   bin/backup-my-runs backup --email=<your username>  --password=<your password> --dry
 
 === Limit the number of files downloaded
-   bin/backup-my-runs backup --username=<your username> --limit=10
+   bin/backup-my-runs backup --email=<your username> --password=<your password> --limit=10
 
 
 

@@ -3,7 +3,7 @@ require File.join([File.dirname(__FILE__),'lib','backup-my-runs_version.rb'])
 
 spec = Gem::Specification.new do |s| 
   s.name = 'backup-my-runs'
-  s.version = BackupMyRuns::Version
+  s.version = "0.0.1"
   s.author = 'Rheneas'
   s.email = 'your@email.address.com'
   s.homepage = 'https://github.com/rheneas/backup-my-runs'
@@ -21,6 +21,7 @@ bin/backup-my-runs
   s.executables << 'backup-my-runs'
   s.add_development_dependency('rake')
   s.add_development_dependency('rdoc')
+  s.add_runtime_dependency('mechanize')
   s.add_runtime_dependency('hpricot')
   s.add_runtime_dependency('gli')
 end

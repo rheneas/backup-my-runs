@@ -36,9 +36,13 @@ command :backup do |c|
   c.arg_name 'dir'
   c.flag [:dir]
 
-  c.desc 'The username whose activities will be downloaded'
-  c.arg_name 'username'
-  c.flag [:username]
+  c.desc 'The email address of the user whose activities will be downloaded'
+  c.arg_name 'email'
+  c.flag [:email]
+
+  c.desc 'The password of the email address'
+  c.arg_name 'password'
+  c.flag [:password]
 
   c.desc 'Limit the number of activities downloaded'
   c.arg_name 'limit'
@@ -48,11 +52,13 @@ command :backup do |c|
   c.switch [:dry]
 
   c.action do |global_options,options,args|
-    raise 'username is blank' if options[:username].nil?
+    raise 'email is blank' if options[:email].nil?
+    raise 'password is blank' if options[:password].nil?
+
     raise 'if limit is set, it must be greater than zero' if options[:limit] && options[:limit].to_i <= 0
 
     limit = options[:limit].to_i > 0 ? options[:limit].to_i : nil
-    BackupMyRuns::User.download(options[:username], options[:dir], options[:dry], limit)
+    BackupMyRuns::User.download(options[:email], options[:password], options[:dir], options[:dry], limit)
 
 
     # Your command logic here
@@ -64,7 +70,7 @@ end
 
 pre do |global,command,options,args|
   # Pre logic here
-  # Return true to proceed; false to abourt and not call the
+  # Return true to proceed; false to abort and not call the
   # chosen command
   # Use skips_pre before a command to skip this block
   # on that command only

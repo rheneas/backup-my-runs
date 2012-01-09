@@ -1,17 +1,36 @@
 require 'hpricot'
-require 'open-uri'
+require 'mechanize'
 
 module BackupMyRuns
   class User
 
-    attr_reader :activities
+    LOGIN_URL= 'https://runkeeper.com/login'
 
-    def initialize()
+    attr_reader :activities, :agent
+
+    def initialize(username, password)
       @activities = []
+      @agent = Mechanize.new
+      login_page = @agent.get LOGIN_URL
+      login_page.form.email = username
+      login_page.form.password = password
+      logged_in_page = login_page.form.submit
+
+      activity_links = logged_in_page.links.select { |link| link.text == "Activities" }
+      if activity_links.empty?
+        raise 'Activity links are empty'
+      end
+
+      activity_page = activity_links.first.click
+      create_activities(activity_page)
     end
 
-    def <<(user_activity)
-      @activities << user_activity
+    def create_activities(activity_page)
+      doc = Hpricot(activity_page.body)
+      elements = doc.search('div.activityMonth')
+      elements.each do |element|
+        @activities << Activity.new(@agent, "https://runkeeper.com#{element.attributes['link']}")
+      end
     end
 
     def download(dir, dry, limit)
@@ -25,25 +44,8 @@ module BackupMyRuns
       end
     end
 
-    def self.find_by_username(username)
-      begin
-        user = User.new
-
-        url = "http://runkeeper.com/user/#{username}/activity/"
-
-        doc = Hpricot(open(url))
-        elements = doc.search('div.activityMonth')
-        elements.each do |element|
-          user << Activity.new(element.attributes["link"])
-        end
-        user
-      rescue OpenURI::HTTPError
-        raise "#{username} was not found"
-      end
-    end
-
-    def self.download(username, dir, dry, limit)
-      find_by_username(username).download(dir, dry, limit)
+    def self.download(username, password, dir, dry, limit)
+      User.new(username, password).download(dir, dry, limit)
     end
   end
 end
