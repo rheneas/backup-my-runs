@@ -1,6 +1,6 @@
 = Backup my runkeeper runs!
 
-A very simple tool to download all your runkeeper activities as JSON files. 
+A very simple tool to download all your runkeeper activities as gpx files. 
 
 
 == Getting started
